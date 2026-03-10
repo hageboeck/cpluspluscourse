@@ -15,29 +15,29 @@
   \onslide<1>
   \begin{exampleblock}{Static.hpp}
   \begin{cppcode}
-    class Text {
-    public:
-      static std::string upper(std::string);
-    private:
-      static int callsToUpper; // add `inline` in C++17
+    struct AddNumbers {
+        int localI;
+        inline static int staticI = 0; // inline is c++17
+
+        int Get() const { return staticI + localI; }
+        static void SetStatic(int i) { staticI = i; }
     };
   \end{cppcode}
   \end{exampleblock}
 
   \onslide<2>
-  \begin{exampleblock}{Static.cpp}
+  \begin{exampleblockGB}{Static.cpp}{https://godbolt.org/z/KjvzrTnP1}{Static members}
   \begin{cppcode}
-    #include "Static.hpp"
-    int Text::callsToUpper = 0; // required before C++17
+    AddNumbers::SetStatic(1);
 
-    std::string Text::upper(std::string lower) {
-      callsToUpper++;
-      // convert lower to upper case
-      // return ...;
-    }
-    std::string uppers = Text::upper("my text");
-    // now Text::callsToUpper is 1
+    AddNumbers a{1}; AddNumbers b{5};
+    a.Get(); // 2
+    b.Get(); // 6
+
+    a.SetStatic(100);
+    a.Get(); // 101
+    b.Get(); // 105
   \end{cppcode}
-  \end{exampleblock}
+  \end{exampleblockGB}
   \end{overprint}
 \end{frame}
