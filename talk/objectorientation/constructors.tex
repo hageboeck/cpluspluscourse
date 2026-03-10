@@ -329,8 +329,8 @@
 
 \begin{frame}[fragile]
   \frametitlecpp[11]{Constructing arrays and vectors}
-  \begin{exampleblock}{List of items given within \{\}}
-    \begin{cppcode*}{firstnumber=10}
+  \begin{exampleblock}{List of items given within \{\} (``braced initializer list'')}
+    \begin{cppcode*}{}
      int ip[3]{1,2,3};
      int* ip = new int[3]{1,2,3}; // not allowed in C++98
      std::vector<int> v{1,2,3};   // same
